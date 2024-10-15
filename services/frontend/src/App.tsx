@@ -7,7 +7,7 @@ export default function App() {
 
   useEffect(() => {
     api.getMovies().then((data) => setMovies(data))
-  })
+  }, [])
 
   return (
     <div>
