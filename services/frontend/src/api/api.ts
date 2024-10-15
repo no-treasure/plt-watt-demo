@@ -4,16 +4,24 @@ import type { Api } from './api-types'
 import type * as Types from './api-types'
 
 // The base URL for the API. This can be overridden by calling `setBaseUrl`.
-let baseUrl = ''
+let baseUrl = '/api'
 // The default headers to send within each request. This can be overridden by calling `setDefaultHeaders`.
 let defaultHeaders = {}
 
-function sanitizeUrl(url: string) : string {
-  if (url.endsWith('/')) { return url.slice(0, -1) } else { return url }
+function sanitizeUrl(url: string): string {
+  if (url.endsWith('/')) {
+    return url.slice(0, -1)
+  } else {
+    return url
+  }
 }
-export const setBaseUrl = (newUrl: string) : void => { baseUrl = sanitizeUrl(newUrl) }
+export const setBaseUrl = (newUrl: string): void => {
+  baseUrl = sanitizeUrl(newUrl)
+}
 
-export const setDefaultHeaders = (headers: Object): void => { defaultHeaders = headers }
+export const setDefaultHeaders = (headers: Object): void => {
+  defaultHeaders = headers
+}
 
 type JSON = Record<string, unknown>
 /* @ts-ignore */
@@ -25,13 +33,48 @@ function headersToJSON(headers: Headers): JSON {
   return output
 }
 
-const _getMovies = async (url: string, request: Types.GetMoviesRequest): Promise<Types.GetMoviesResponses> => {
-  const queryParameters: (keyof Types.GetMoviesRequest)[]  = ['limit', 'offset', 'totalCount', 'fields', 'where.id.eq', 'where.id.neq', 'where.id.gt', 'where.id.gte', 'where.id.lt', 'where.id.lte', 'where.id.like', 'where.id.in', 'where.id.nin', 'where.id.contains', 'where.id.contained', 'where.id.overlaps', 'where.title.eq', 'where.title.neq', 'where.title.gt', 'where.title.gte', 'where.title.lt', 'where.title.lte', 'where.title.like', 'where.title.in', 'where.title.nin', 'where.title.contains', 'where.title.contained', 'where.title.overlaps', 'where.or', 'orderby.id', 'orderby.title']
+const _getMovies = async (
+  url: string,
+  request: Types.GetMoviesRequest
+): Promise<Types.GetMoviesResponses> => {
+  const queryParameters: (keyof Types.GetMoviesRequest)[] = [
+    'limit',
+    'offset',
+    'totalCount',
+    'fields',
+    'where.id.eq',
+    'where.id.neq',
+    'where.id.gt',
+    'where.id.gte',
+    'where.id.lt',
+    'where.id.lte',
+    'where.id.like',
+    'where.id.in',
+    'where.id.nin',
+    'where.id.contains',
+    'where.id.contained',
+    'where.id.overlaps',
+    'where.title.eq',
+    'where.title.neq',
+    'where.title.gt',
+    'where.title.gte',
+    'where.title.lt',
+    'where.title.lte',
+    'where.title.like',
+    'where.title.in',
+    'where.title.nin',
+    'where.title.contains',
+    'where.title.contained',
+    'where.title.overlaps',
+    'where.or',
+    'orderby.id',
+    'orderby.title'
+  ]
   const searchParams = new URLSearchParams()
   queryParameters.forEach((qp) => {
     if (request[qp]) {
       if (Array.isArray(request[qp])) {
-        (request[qp] as string[]).forEach((p) => {
+        ;(request[qp] as string[]).forEach((p) => {
           searchParams.append(qp, p)
         })
       } else {
@@ -56,10 +99,15 @@ const _getMovies = async (url: string, request: Types.GetMoviesRequest): Promise
   return await response.json()
 }
 
-export const getMovies: Api['getMovies'] = async (request: Types.GetMoviesRequest): Promise<Types.GetMoviesResponses> => {
+export const getMovies: Api['getMovies'] = async (
+  request: Types.GetMoviesRequest
+): Promise<Types.GetMoviesResponses> => {
   return await _getMovies(baseUrl, request)
 }
-const _createMovie = async (url: string, request: Types.CreateMovieRequest): Promise<Types.CreateMovieResponses> => {
+const _createMovie = async (
+  url: string,
+  request: Types.CreateMovieRequest
+): Promise<Types.CreateMovieResponses> => {
   const headers = {
     ...defaultHeaders,
     'Content-type': 'application/json; charset=utf-8'
@@ -78,16 +126,48 @@ const _createMovie = async (url: string, request: Types.CreateMovieRequest): Pro
   return await response.json()
 }
 
-export const createMovie: Api['createMovie'] = async (request: Types.CreateMovieRequest): Promise<Types.CreateMovieResponses> => {
+export const createMovie: Api['createMovie'] = async (
+  request: Types.CreateMovieRequest
+): Promise<Types.CreateMovieResponses> => {
   return await _createMovie(baseUrl, request)
 }
-const _updateMovies = async (url: string, request: Types.UpdateMoviesRequest): Promise<Types.UpdateMoviesResponses> => {
-  const queryParameters: (keyof Types.UpdateMoviesRequest)[]  = ['fields', 'where.id.eq', 'where.id.neq', 'where.id.gt', 'where.id.gte', 'where.id.lt', 'where.id.lte', 'where.id.like', 'where.id.in', 'where.id.nin', 'where.id.contains', 'where.id.contained', 'where.id.overlaps', 'where.title.eq', 'where.title.neq', 'where.title.gt', 'where.title.gte', 'where.title.lt', 'where.title.lte', 'where.title.like', 'where.title.in', 'where.title.nin', 'where.title.contains', 'where.title.contained', 'where.title.overlaps', 'where.or']
+const _updateMovies = async (
+  url: string,
+  request: Types.UpdateMoviesRequest
+): Promise<Types.UpdateMoviesResponses> => {
+  const queryParameters: (keyof Types.UpdateMoviesRequest)[] = [
+    'fields',
+    'where.id.eq',
+    'where.id.neq',
+    'where.id.gt',
+    'where.id.gte',
+    'where.id.lt',
+    'where.id.lte',
+    'where.id.like',
+    'where.id.in',
+    'where.id.nin',
+    'where.id.contains',
+    'where.id.contained',
+    'where.id.overlaps',
+    'where.title.eq',
+    'where.title.neq',
+    'where.title.gt',
+    'where.title.gte',
+    'where.title.lt',
+    'where.title.lte',
+    'where.title.like',
+    'where.title.in',
+    'where.title.nin',
+    'where.title.contains',
+    'where.title.contained',
+    'where.title.overlaps',
+    'where.or'
+  ]
   const searchParams = new URLSearchParams()
   queryParameters.forEach((qp) => {
     if (request[qp]) {
       if (Array.isArray(request[qp])) {
-        (request[qp] as string[]).forEach((p) => {
+        ;(request[qp] as string[]).forEach((p) => {
           searchParams.append(qp, p)
         })
       } else {
@@ -115,16 +195,21 @@ const _updateMovies = async (url: string, request: Types.UpdateMoviesRequest): P
   return await response.json()
 }
 
-export const updateMovies: Api['updateMovies'] = async (request: Types.UpdateMoviesRequest): Promise<Types.UpdateMoviesResponses> => {
+export const updateMovies: Api['updateMovies'] = async (
+  request: Types.UpdateMoviesRequest
+): Promise<Types.UpdateMoviesResponses> => {
   return await _updateMovies(baseUrl, request)
 }
-const _getMovieById = async (url: string, request: Types.GetMovieByIdRequest): Promise<Types.GetMovieByIdResponses> => {
-  const queryParameters: (keyof Types.GetMovieByIdRequest)[]  = ['fields']
+const _getMovieById = async (
+  url: string,
+  request: Types.GetMovieByIdRequest
+): Promise<Types.GetMovieByIdResponses> => {
+  const queryParameters: (keyof Types.GetMovieByIdRequest)[] = ['fields']
   const searchParams = new URLSearchParams()
   queryParameters.forEach((qp) => {
     if (request[qp]) {
       if (Array.isArray(request[qp])) {
-        (request[qp] as string[]).forEach((p) => {
+        ;(request[qp] as string[]).forEach((p) => {
           searchParams.append(qp, p)
         })
       } else {
@@ -149,16 +234,21 @@ const _getMovieById = async (url: string, request: Types.GetMovieByIdRequest): P
   return await response.json()
 }
 
-export const getMovieById: Api['getMovieById'] = async (request: Types.GetMovieByIdRequest): Promise<Types.GetMovieByIdResponses> => {
+export const getMovieById: Api['getMovieById'] = async (
+  request: Types.GetMovieByIdRequest
+): Promise<Types.GetMovieByIdResponses> => {
   return await _getMovieById(baseUrl, request)
 }
-const _updateMovie = async (url: string, request: Types.UpdateMovieRequest): Promise<Types.UpdateMovieResponses> => {
-  const queryParameters: (keyof Types.UpdateMovieRequest)[]  = ['fields']
+const _updateMovie = async (
+  url: string,
+  request: Types.UpdateMovieRequest
+): Promise<Types.UpdateMovieResponses> => {
+  const queryParameters: (keyof Types.UpdateMovieRequest)[] = ['fields']
   const searchParams = new URLSearchParams()
   queryParameters.forEach((qp) => {
     if (request[qp]) {
       if (Array.isArray(request[qp])) {
-        (request[qp] as string[]).forEach((p) => {
+        ;(request[qp] as string[]).forEach((p) => {
           searchParams.append(qp, p)
         })
       } else {
@@ -186,16 +276,21 @@ const _updateMovie = async (url: string, request: Types.UpdateMovieRequest): Pro
   return await response.json()
 }
 
-export const updateMovie: Api['updateMovie'] = async (request: Types.UpdateMovieRequest): Promise<Types.UpdateMovieResponses> => {
+export const updateMovie: Api['updateMovie'] = async (
+  request: Types.UpdateMovieRequest
+): Promise<Types.UpdateMovieResponses> => {
   return await _updateMovie(baseUrl, request)
 }
-const _deleteMovies = async (url: string, request: Types.DeleteMoviesRequest): Promise<Types.DeleteMoviesResponses> => {
-  const queryParameters: (keyof Types.DeleteMoviesRequest)[]  = ['fields']
+const _deleteMovies = async (
+  url: string,
+  request: Types.DeleteMoviesRequest
+): Promise<Types.DeleteMoviesResponses> => {
+  const queryParameters: (keyof Types.DeleteMoviesRequest)[] = ['fields']
   const searchParams = new URLSearchParams()
   queryParameters.forEach((qp) => {
     if (request[qp]) {
       if (Array.isArray(request[qp])) {
-        (request[qp] as string[]).forEach((p) => {
+        ;(request[qp] as string[]).forEach((p) => {
           searchParams.append(qp, p)
         })
       } else {
@@ -223,10 +318,15 @@ const _deleteMovies = async (url: string, request: Types.DeleteMoviesRequest): P
   return await response.json()
 }
 
-export const deleteMovies: Api['deleteMovies'] = async (request: Types.DeleteMoviesRequest): Promise<Types.DeleteMoviesResponses> => {
+export const deleteMovies: Api['deleteMovies'] = async (
+  request: Types.DeleteMoviesRequest
+): Promise<Types.DeleteMoviesResponses> => {
   return await _deleteMovies(baseUrl, request)
 }
-const _getExample = async (url: string, request: Types.GetExampleRequest): Promise<Types.GetExampleResponses> => {
+const _getExample = async (
+  url: string,
+  request: Types.GetExampleRequest
+): Promise<Types.GetExampleResponses> => {
   const headers = {
     ...defaultHeaders
   }
@@ -247,23 +347,25 @@ const _getExample = async (url: string, request: Types.GetExampleRequest): Promi
     return {
       statusCode: response.status as 200,
       headers: headersToJSON(response.headers),
-      body: await response.json() as any
+      body: (await response.json()) as any
     }
   }
   return {
     statusCode: response.status as 200,
     headers: headersToJSON(response.headers),
-    body: await response.text() as any
+    body: (await response.text()) as any
   }
 }
 
-export const getExample: Api['getExample'] = async (request: Types.GetExampleRequest): Promise<Types.GetExampleResponses> => {
+export const getExample: Api['getExample'] = async (
+  request: Types.GetExampleRequest
+): Promise<Types.GetExampleResponses> => {
   return await _getExample(baseUrl, request)
 }
 type BuildOptions = {
   headers?: Object
 }
-export default function build (url: string, options?: BuildOptions) {
+export default function build(url: string, options?: BuildOptions) {
   url = sanitizeUrl(url)
   if (options?.headers) {
     defaultHeaders = options.headers
