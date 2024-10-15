@@ -2,15 +2,12 @@
   "$schema": "https://schemas.platformatic.dev/@platformatic/db/2.5.5.json",
   "db": {
     "connectionString": "{DATABASE_URL}",
-    "graphql": true,
+    "graphql": false,
     "openapi": true,
     "schemalock": true
   },
   "watch": {
-    "ignore": [
-      "*.sqlite",
-      "*.sqlite-journal"
-    ]
+    "ignore": ["*.sqlite", "*.sqlite-journal"]
   },
   "server": {
     "hostname": "{PLT_SERVER_HOSTNAME}",

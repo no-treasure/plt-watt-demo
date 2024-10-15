@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
+import { GetMoviesResponses } from './api/api-types'
+import { api } from './api'
 
 export default function App() {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState<GetMoviesResponses>([])
 
   useEffect(() => {
-    fetch('/platformatic-db/movies', { cache: 'no-store' })
-      .then((res) => res.json())
-      .then((data) => setMovies(data))
+    api.getMovies().then((data) => setMovies(data))
   })
 
   return (

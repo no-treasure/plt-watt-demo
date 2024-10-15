@@ -2,13 +2,5 @@
   "$schema": "https://schemas.platformatic.dev/@platformatic/vite/2.0.0.json",
   "application": {
     "basePath": "/frontend"
-  },
-  "clients": [
-    {
-      "schema": "api/api.openapi.json",
-      "name": "api",
-      "type": "openapi",
-      "url": "{PLT_API_URL}"
-    }
-  ]
+  }
 }
